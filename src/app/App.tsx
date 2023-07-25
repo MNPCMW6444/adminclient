@@ -65,12 +65,14 @@ function App() {
 
   const stopInstance = (id: string) => {
     axios
-      .post("/api/stopInstance", { instanceId: id })
+      .post("http://localhost:6544" + "/instances/stopInstance", {
+        instanceId: id,
+      })
       .then((response) => {
         console.log(response.data);
         // Refresh instances
         axios
-          .get("http://localhost:6544" + "/api/all")
+          .get("http://localhost:6544" + "/instances/all")
           .then((response) => {
             setInstances(response.data.allInstances);
           })
