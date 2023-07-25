@@ -5,7 +5,6 @@ COPY tsconfig.json /app/tsconfig.json
 COPY public /app/public
 COPY src /app/src
 COPY server.js /app/server.js
-COPY .npmrc /root/.npmrc
 RUN npm run prod
 RUN npm run clean:p
 RUN npm i --omit=dev
