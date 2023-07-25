@@ -14,6 +14,7 @@ interface Instance {
   id: string;
   type: string;
   state: string;
+  name: string;
 }
 
 const StartButton = styled(Button)(({ theme }) => ({
@@ -91,10 +92,11 @@ function App() {
         EC2 Instances
       </Typography>
       <List>
-        {instances.map((instance, index) => (
+        {instances?.map((instance, index) => (
           <ListItem key={index}>
             <ListItemText>
               <Typography variant="h6">Instance ID: {instance.id}</Typography>
+              <Typography variant="h6">Name: {instance.name}</Typography>
               <Typography variant="body1">Type: {instance.type}</Typography>
               <Typography variant="body1">State: {instance.state}</Typography>
             </ListItemText>
