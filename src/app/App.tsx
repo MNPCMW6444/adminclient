@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Button,
@@ -9,6 +9,12 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+
+interface Instance {
+  id: string;
+  type: string;
+  state: string;
+}
 
 const StartButton = styled(Button)(({ theme }) => ({
   color: theme.palette.success.main,
@@ -22,11 +28,11 @@ const StopButton = styled(Button)(({ theme }) => ({
 }));
 
 function App() {
-  const [instances, setInstances] = useState([]);
+  const [instances, setInstances] = useState<Instance[]>([]);
 
   useEffect(() => {
     axios
-      .get("/api/all")
+      .get("http://localhost:6544" + "/instances/all")
       .then((response) => {
         setInstances(response.data.allInstances);
       })
@@ -37,12 +43,14 @@ function App() {
 
   const startInstance = (id: string) => {
     axios
-      .post("/api/startInstance", { instanceId: id })
+      .post("http://localhost:6544" + "/instances/startInstance", {
+        instanceId: id,
+      })
       .then((response) => {
         console.log(response.data);
         // Refresh instances
         axios
-          .get("/api/all")
+          .get("http://localhost:6544" + "/instances/all")
           .then((response) => {
             setInstances(response.data.allInstances);
           })
@@ -62,7 +70,7 @@ function App() {
         console.log(response.data);
         // Refresh instances
         axios
-          .get("/api/all")
+          .get("http://localhost:6544" + "/api/all")
           .then((response) => {
             setInstances(response.data.allInstances);
           })
@@ -84,25 +92,19 @@ function App() {
         {instances.map((instance, index) => (
           <ListItem key={index}>
             <ListItemText>
-              <Typography variant="h6">
-                Instance ID: {(instance as any).id}
-              </Typography>
-              <Typography variant="body1">
-                Type: {(instance as any).type}
-              </Typography>
-              <Typography variant="body1">
-                State: {(instance as any).state}
-              </Typography>
+              <Typography variant="h6">Instance ID: {instance.id}</Typography>
+              <Typography variant="body1">Type: {instance.type}</Typography>
+              <Typography variant="body1">State: {instance.state}</Typography>
             </ListItemText>
             <StartButton
               variant="outlined"
-              onClick={() => startInstance((instance as any).id)}
+              onClick={() => startInstance(instance.id)}
             >
               Start
             </StartButton>
             <StopButton
               variant="outlined"
-              onClick={() => stopInstance((instance as any).id)}
+              onClick={() => stopInstance(instance.id)}
             >
               Stop
             </StopButton>
