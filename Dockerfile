@@ -4,7 +4,6 @@ COPY package.json /app/package.json
 COPY tsconfig.json /app/tsconfig.json
 COPY public /app/public
 COPY src /app/src
-COPY website /app/website
 COPY server.js /app/server.js
 COPY .npmrc /root/.npmrc
 RUN npm run prod
@@ -18,7 +17,6 @@ COPY packageserver.json /app/package.json
 COPY --from=builder /app/package-lock.json /app/package-lock.json
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/build /app/build
-COPY --from=builder /app/website /app/website
 COPY server.js /app/server.js
 CMD ["node", "./server.js"]
 EXPOSE 5999
