@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Button,
@@ -6,6 +6,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  TextField,
   Typography,
   styled,
 } from "@mui/material";
@@ -30,6 +31,9 @@ const StopButton = styled(Button)(({ theme }) => ({
 
 function AWS() {
   const [instances, setInstances] = useState<Instance[]>([]);
+
+  const [subdomain, setSubdomain] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
   useEffect(() => {
     axios
@@ -115,6 +119,29 @@ function AWS() {
           </ListItem>
         )) || "loading..."}
       </List>
+      <TextField
+        value={subdomain}
+        onChange={(e) => setSubdomain(e.target.value)}
+      />
+      <TextField
+        value={password}
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button
+        onClick={async () => {
+          try {
+            axios.post("http://localhost:6544" + "/instances/launch", {
+              subdomain,
+              password,
+            });
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      >
+        Launch dev
+      </Button>
     </Container>
   );
 }
