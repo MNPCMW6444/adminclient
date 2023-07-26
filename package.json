@@ -1,6 +1,6 @@
 {
-  "name": "adminclient",
-  "version": "4.1.0",
+  "name": "failean-adminclient",
+  "version": "5.1.0",
   "private": true,
   "devDependencies": {
     "@emotion/react": "^11.11.1",
@@ -40,7 +40,7 @@
     "connect": "npm run prod",
     "prelocalprod": "rm -f .npmrc",
     "localprod": "npm run connect",
-    "d:b": "VERSION=$(node -p \"require('./package.json').version\") && docker build --platform amd64 -t 988253048728.dkr.ecr.us-east-1.amazonaws.com/client:$VERSION .",
+    "d:b": "VERSION=$(node -p \"require('./package.json').version\") && docker build --platform amd64 -t 988253048728.dkr.ecr.us-east-1.amazonaws.com/adminclient:$VERSION .",
     "dev": "PORT=5990 react-scripts start",
     "preudev": "npm run update",
     "udev": "npm run dev",
