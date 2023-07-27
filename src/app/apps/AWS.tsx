@@ -37,7 +37,7 @@ function AWS() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:6544" + "/instances/all")
+      .get("http://localhost:6544/instances/all")
       .then((response) => {
         setInstances(response.data.instances);
       })
@@ -48,14 +48,14 @@ function AWS() {
 
   const startInstance = (id: string) => {
     axios
-      .post("http://localhost:6544" + "/instances/startInstance", {
+      .post("http://localhost:6544/instances/startInstance", {
         instanceId: id,
       })
       .then((response) => {
         console.log(response.data);
         // Refresh instances
         axios
-          .get("http://localhost:6544" + "/instances/all")
+          .get("http://localhost:6544/instances/all")
           .then((response) => {
             setInstances(response.data.allInstances);
           })
@@ -70,14 +70,14 @@ function AWS() {
 
   const stopInstance = (id: string) => {
     axios
-      .post("http://localhost:6544" + "/instances/stopInstance", {
+      .post("http://localhost:6544/instances/stopInstance", {
         instanceId: id,
       })
       .then((response) => {
         console.log(response.data);
         // Refresh instances
         axios
-          .get("http://localhost:6544" + "/instances/all")
+          .get("http://localhost:6544/instances/all")
           .then((response) => {
             setInstances(response.data.allInstances);
           })
@@ -131,7 +131,7 @@ function AWS() {
       <Button
         onClick={async () => {
           try {
-            axios.post("http://localhost:6544" + "/instances/launch", {
+            axios.post("http://localhost:6544/instances/launch", {
               subdomain,
               password,
             });
