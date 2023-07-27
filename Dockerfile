@@ -9,7 +9,6 @@ RUN npm run prod
 RUN npm run clean:p
 RUN npm i --omit=dev
 RUN rm -rf .npmrc
-RUN rm -rf .npmrc
 FROM 988253048728.dkr.ecr.us-east-1.amazonaws.com/node:lts-slim
 WORKDIR /app
 COPY package.json /app/package.json
