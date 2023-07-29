@@ -12,7 +12,7 @@ app.get('*', (__dirname,res) =>{
     res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
-const port = process.env.PORT || 5999;
+const port = process.env.PORT || 5990;
 app.listen(port);
 
 console.log('App is listening on port ' + port);
