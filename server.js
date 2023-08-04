@@ -13,6 +13,9 @@ app.get('*', (__dirname,res) =>{
 });
 
 const port = process.env.PORT || 5990;
-app.listen(port);
+app.listen(port, '0.0.0.0', ()=>{
+    console.log(`Server ready at http://0.0.0.0:${port}`);
+});
+
 
 console.log('App is listening on port ' + port);
